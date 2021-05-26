@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: docker.pkg.github.com/bookablecom/container-images/organization-service
+  pullPolicy: IfNotPresent
+  tag: "1.2-SNAPSHOT"
+
+fullnameOverride: "organization-service"
+
+serviceAccount:
+  create: true
+
+service:
+  type: ClusterIP
+  port: 8080

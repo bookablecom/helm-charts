@@ -32,10 +32,10 @@ spec:
               port: http
           env:
             - name: DB_USERNAME
-              value: usersvc
+              value: organizationsvc
             - name: DB_PASSWORD
-              value: P7LCR775HfbGNg
+              value: ULnocXx4dZQwXc
             - name: DB_NAME
-              value: usersvc
+              value: organizationsvc
             - name: DB_HOST
               value: postgres-service.default.svc.cluster.local
