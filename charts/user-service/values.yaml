@@ -3,9 +3,9 @@ replicaCount: 1
 name: user-service
 
 image:
-  repository: nginx
+  repository: docker.pkg.github.com/bookablecom/container-images/organization-service
   pullPolicy: IfNotPresent
-  tag: ""
+  tag: "1.2-snapshot"
 
 imagePullSecrets: []
 nameOverride: ""
