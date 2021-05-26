@@ -1,0 +1,4 @@
+name: postgres-service
+ip: 192.168.86.116
+service:
+  port: 5432
