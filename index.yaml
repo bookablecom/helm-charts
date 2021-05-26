@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  user-service:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-05-26T13:11:02.297230314Z"
+    description: A Helm chart for Kubernetes
+    digest: f91bc6dd6d12732292891aa96d73d7636cb51c93993187bf2328cd2b530f9d43
+    name: user-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/user-service-0.1.0/user-service-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-05-26T13:11:02.051401412Z"
