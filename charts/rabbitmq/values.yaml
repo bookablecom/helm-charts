@@ -1,0 +1,5 @@
+name: rabbitmq
+management:
+  port: 15672
+service:
+  port: 5672

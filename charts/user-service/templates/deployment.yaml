@@ -24,14 +24,15 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: http
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 3
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: http
+              port: 8080
           env:
             - name: DB_USERNAME
               value: usersvc
@@ -41,3 +42,7 @@ spec:
               value: usersvc
             - name: DB_HOST
               value: postgres-service.default.svc.cluster.local
+            - name: RABBIT_HOST
+              value: rabbitmq.default.svc.cluster.local
+            - name: RABBIT_PORT
+              value: "5672"
