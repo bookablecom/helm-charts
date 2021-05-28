@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: docker.pkg.github.com/bookablecom/container-images/user-service
+  repository: ghcr.io/bookablecom/user-service
   pullPolicy: IfNotPresent
-  tag: "1.0-snapshot"
+  tag: "1.0-SNAPSHOT"
 
 fullnameOverride: "user-service"
 
