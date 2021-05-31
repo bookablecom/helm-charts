@@ -24,20 +24,39 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: http
+          #livenessProbe:
+          #  httpGet:
+          #    path: /actuator/health/liveness
+          #    port: 8080
+          #  initialDelaySeconds: 3
+          #  periodSeconds: 3
+          #readinessProbe:
+          #  httpGet:
+          #    path: /actuator/health/readiness
+          #    port: 8080
+          #  initialDelaySeconds: 3
+          #  periodSeconds: 3
           env:
             - name: DB_USERNAME
-              value: organizationsvc
+              valueFrom:
+                secretKeyRef:
+                  name: organization-service-db-secret
+                  key: DB_USERNAME
+
             - name: DB_PASSWORD
-              value: ULnocXx4dZQwXc
+              valueFrom:
+                secretKeyRef:
+                  name: organization-service-db-secret
+                  key: DB_PASSWORD
+
             - name: DB_NAME
               value: organizationsvc
+
             - name: DB_HOST
               value: postgres-service.default.svc.cluster.local
+
+            - name: RABBIT_HOST
+              value: rabbitmq.default.svc.cluster.local
+              
+            - name: RABBIT_PORT
+              value: "5672"

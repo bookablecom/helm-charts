@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: docker.pkg.github.com/bookablecom/container-images/organization-service
+  repository: ghcr.io/bookablecom/organization-service
   pullPolicy: IfNotPresent
-  tag: "1.2-SNAPSHOT"
+  tag: "1.0-SNAPSHOT"
 
 fullnameOverride: "organization-service"
 
