@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/bookablecom/organization-service
   pullPolicy: IfNotPresent
-  tag: "1.0-SNAPSHOT"
+  tag: "1.9-SNAPSHOT"
 
 fullnameOverride: "organization-service"
 

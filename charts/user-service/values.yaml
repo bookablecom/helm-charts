@@ -2,8 +2,8 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/bookablecom/user-service
-  pullPolicy: IfNotPresent
-  tag: "1.2-SNAPSHOT"
+  pullPolicy: Always
+  tag: "1.3-SNAPSHOT"
 
 fullnameOverride: "user-service"
 
