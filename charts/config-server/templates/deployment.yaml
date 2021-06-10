@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      serviceAccountName: {{ .Chart.Name }}
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: GITHUB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: config-server-github-secret
+                  key: GITHUB_USERNAME
+
+            - name: GITHUB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: config-server-github-secret
+                  key: GITHUB_PASSWORD
+
+            - name: CONFIG_REPO_URI
+              value: https://github.com/bookablecom/configurations

@@ -1,8 +1,8 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/user-service:1.0.0
+image: ghcr.io/bookablecom/config-server:1.0.0
 
-fullnameOverride: "user-service"
+fullnameOverride: "config-server"
 
 serviceAccount:
   create: true

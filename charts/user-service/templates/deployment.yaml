@@ -19,7 +19,7 @@ spec:
         - name: dockerconfigjson-github-com
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: {{ .Values.image }}
           ports:
             - name: http
               containerPort: 8080
@@ -48,6 +48,9 @@ spec:
                 secretKeyRef:
                   name: user-service-db-secret
                   key: DB_PASSWORD
+
+            - name: CONFIG_SERVER_URI
+              value: http://config-server.default.svc.cluster.local:8080
 
             - name: DB_NAME
               value: usersvc

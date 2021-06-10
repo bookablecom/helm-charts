@@ -12,17 +12,17 @@ spec:
   - host: "api.bsgrd.com"
     http:
       paths:
-      - pathType: Prefix
-        path: "/"
+      - path: "/users"
+        pathType: Prefix
         backend:
           service:
             name: user-service
             port:
               number: 8080
-      #- pathType: Prefix
-      #  path: "/organizations"
-      #  backend:
-      #    service:
-      #      name: organization-service
-      #      port:
-      #        number: 8080
+      - path: "/organizations"
+        pathType: Prefix
+        backend:
+          service:
+            name: organization-service
+            port:
+              number: 8080
