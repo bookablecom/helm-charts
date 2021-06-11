@@ -14,6 +14,16 @@ entries:
   ingress:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-06-11T13:24:59.138247599Z"
+    description: A Helm chart for Kubernetes
+    digest: 2220d7f8fddcb9649a79ab698c3d10f263a140d788553ab9cb032e284f8d6938
+    name: ingress
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/ingress-1.0.1/ingress-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-06-10T12:48:39.470535761Z"
     description: A Helm chart for Kubernetes
     digest: f03eb0d6a5fa2b68d986fa38ebcd65fa087afda0b4add16dfa5f1c4efcc6463b
@@ -22,7 +32,28 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/ingress-1.0.0/ingress-1.0.0.tgz
     version: 1.0.0
+  keycloak:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-06-11T13:24:59.299477867Z"
+    description: A Helm chart for Kubernetes
+    digest: 8733ce6f749844e40f23051d8c33a0b3bbe11a6e1a82bf7cb81e4670f2631b96
+    name: keycloak
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/keycloak-1.0.0/keycloak-1.0.0.tgz
+    version: 1.0.0
   organization-service:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-06-11T13:24:59.438400935Z"
+    description: A Helm chart for Kubernetes
+    digest: d4c67ac5c4ad83e6c1fe6df8cb1b0a75202a2a5e9f5d523152d577922e5010fa
+    name: organization-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/organization-service-1.0.1/organization-service-1.0.1.tgz
+    version: 1.0.1
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-06-10T12:48:39.629176431Z"
@@ -66,6 +97,16 @@ entries:
     - https://github.com/bookablecom/helm-charts/releases/download/rabbitmq-1.0.0/rabbitmq-1.0.0.tgz
     version: 1.0.0
   user-service:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-06-11T13:24:59.607474195Z"
+    description: A Helm chart for Kubernetes
+    digest: 9c0969bf72edfcb2bfdb58a4b2d3f75b1f371f7fa3ac0fa4f3a3a15be7ddb9df
+    name: user-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/user-service-1.0.1/user-service-1.0.1.tgz
+    version: 1.0.1
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-06-10T12:48:40.164311703Z"
