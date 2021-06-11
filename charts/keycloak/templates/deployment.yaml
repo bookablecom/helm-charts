@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      serviceAccountName: {{ .Chart.Name }}
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: KEYCLOAK_USER
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-admin-user-secret
+                  key: KEYCLOAK_USER
+
+            - name: KEYCLOAK_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-admin-user-secret
+                  key: KEYCLOAK_PASSWORD
+            
+            - name: DB_VENDOR
+              value: postgres
+
+            - name: DB_ADDR
+              value: postgres-service.default.svc.cluster.local
+
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-db-secret
+                  key: DB_USERNAME
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-db-secret
+                  key: DB_PASSWORD
+
+            - name: DB_DATABASE
+              value: keycloak
+
+            - name: DB_PORT
+              value: "5432"

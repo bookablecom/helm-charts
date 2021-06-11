@@ -1,0 +1,12 @@
+replicaCount: 1
+
+image: richardjkendall/keycloak-arm
+
+fullnameOverride: "keycloak"
+
+serviceAccount:
+  create: true
+
+service:
+  type: ClusterIP
+  port: 8080
