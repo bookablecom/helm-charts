@@ -56,6 +56,16 @@ entries:
   organization-service:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-06-17T13:19:15.047918876Z"
+    description: A Helm chart for Kubernetes
+    digest: 7acbe84621ce3ca8eccb9088670154ab28a7b9ccbe0b2ed16caf1c8526f1be3e
+    name: organization-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/organization-service-1.1.1/organization-service-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-06-17T08:31:22.949708727Z"
     description: A Helm chart for Kubernetes
     digest: 26d56d3e1a0e2305eaddd6ccb157044ac0a95abdd0ce2f73e7fa247a0b10ba0e
@@ -117,6 +127,16 @@ entries:
     - https://github.com/bookablecom/helm-charts/releases/download/rabbitmq-1.0.0/rabbitmq-1.0.0.tgz
     version: 1.0.0
   user-service:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-06-17T13:19:15.180440562Z"
+    description: A Helm chart for Kubernetes
+    digest: 974f5ede7c72afa9d94ab173ffe2ef9a27a0f122713f3f1864281cef49ed18a5
+    name: user-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/user-service-1.1.1/user-service-1.1.1.tgz
+    version: 1.1.1
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-06-17T08:31:23.092497404Z"
