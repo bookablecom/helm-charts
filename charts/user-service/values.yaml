@@ -1,6 +1,6 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/user-service:1.0.0
+image: ghcr.io/bookablecom/user-service:1.1.0
 
 fullnameOverride: "user-service"
 

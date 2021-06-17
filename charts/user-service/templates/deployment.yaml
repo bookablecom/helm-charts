@@ -63,3 +63,6 @@ spec:
 
             - name: RABBIT_PORT
               value: "5672"
+            
+            - name: JAEGER_URL
+              value: http://jaeger.linkerd-jaeger:14268/api/traces
