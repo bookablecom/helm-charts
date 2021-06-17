@@ -56,10 +56,10 @@ spec:
               value: usersvc
 
             - name: DB_HOST
-              value: postgres-service.default.svc.cluster.local
+              value: postgres-service.postgres.svc.cluster.local
 
             - name: RABBIT_HOST
-              value: rabbitmq.default.svc.cluster.local
+              value: rabbitmq.rabbitmq.svc.cluster.local
 
             - name: RABBIT_PORT
               value: "5672"
