@@ -35,6 +35,16 @@ entries:
   keycloak:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-06-17T12:45:37.314863771Z"
+    description: A Helm chart for Kubernetes
+    digest: 53a6a95f1319170641ec752f0b2c9abb5eebbef94fcaabfd0157b94ff569b150
+    name: keycloak
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/keycloak-1.1.0/keycloak-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-06-11T13:24:59.299477867Z"
     description: A Helm chart for Kubernetes
     digest: 8733ce6f749844e40f23051d8c33a0b3bbe11a6e1a82bf7cb81e4670f2631b96
