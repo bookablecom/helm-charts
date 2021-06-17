@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Chart.Name }}-route
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`auth.bsgrd.com`)
+    kind: Rule
+    services:
+    - name: {{ .Chart.Name }}
+      port: {{ .Values.service.port }}
