@@ -129,6 +129,16 @@ entries:
   spring-app:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-24T11:01:09.482318166Z"
+    description: A Helm chart a spring application
+    digest: 2b239d7db8399b46de49c7fc4443edbe46698c30fb61c4915ad395e280313a3f
+    name: spring-app
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/spring-app-0.1.3/spring-app-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-09-24T10:48:24.295245011Z"
     description: A Helm chart a spring application
     digest: e3dcb9cc5278c1616884184c9bfc26aafd3f5a0a08d3a8631317bfeba658203d
@@ -228,4 +238,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/user-service-0.1.0/user-service-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-24T10:48:24.295291511Z"
+generated: "2021-09-24T11:01:09.482360267Z"
