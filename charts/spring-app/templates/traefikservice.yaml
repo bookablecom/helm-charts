@@ -1,0 +1,13 @@
+{{- if .Values.ingressroute.enabled }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: TraefikService
+metadata:
+  name: {{ .Values.name }}
+spec:
+  weighted:
+    services:
+      - name: {{ .Values.name }}
+        weight: 1
+        port: {{ .Values.service.port }}
+        kind: Service
+{{- end}}

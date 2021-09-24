@@ -1,0 +1,41 @@
+replicaCount: 1
+
+image: ghcr.io/bookablecom/organization-service:v1.11.11
+
+name: "spring-app"
+
+serviceAccount:
+  create: true
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingressroute:
+  enabled: true
+  match: Host(`api.bsgrd.com`) && PathPrefix(`/`)
+
+livenessProbe:
+  enabled: true
+
+readinessProbe:
+  enabled: true
+
+imagePullSecret:
+  enabled: true
+  secretName: dockerconfigjson-github-com
+
+db:
+  enabled: true
+  username: ""
+  password: ""
+  dbname: ""
+
+rabbitmq:
+  enabled: true
+  host: "rabbitmq.rabbitmq.svc.cluster.local"
+  port: "5672"
+
+configserver:
+  enabled: true
+  uri: "http://config-server.default.svc.cluster.local:8080"
