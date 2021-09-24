@@ -78,7 +78,7 @@ spec:
               value: {{ .Values.rabbitmq.host }}
               
             - name: RABBIT_PORT
-              value: {{ .Values.rabbitmq.port }}
+              value: "{{ .Values.rabbitmq.port }}"
           {{- end}}
             
             - name: JAEGER_URL
