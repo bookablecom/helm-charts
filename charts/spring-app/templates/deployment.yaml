@@ -43,9 +43,6 @@ spec:
             periodSeconds: 3
           {{- end}}
           env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: local
-
           {{- if .Values.db.enabled }}
             - name: DB_USERNAME
               valueFrom:
