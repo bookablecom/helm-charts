@@ -126,6 +126,17 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/rabbitmq-1.0.0/rabbitmq-1.0.0.tgz
     version: 1.0.0
+  spring-app:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-09-24T07:21:17.337728282Z"
+    description: A Helm chart a spring application
+    digest: 35f489940c446efe34e938ff531c4251dbe47f0551c121c75b15de0ba955c0af
+    name: spring-app
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/spring-app-0.1.1/spring-app-0.1.1.tgz
+    version: 0.1.1
   user-service:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -207,4 +218,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/user-service-0.1.0/user-service-0.1.0.tgz
     version: 0.1.0
-generated: "2021-05-26T13:11:02.051401412Z"
+generated: "2021-09-24T07:21:17.337775883Z"
