@@ -31,7 +31,7 @@ spec:
             httpGet:
               path: /actuator/health/liveness
               port: 8080
-            initialDelaySeconds: 3
+            initialDelaySeconds: ${{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: 3
           {{- end}}
           {{- if .Values.readinessProbe.enabled }}
@@ -39,44 +39,21 @@ spec:
             httpGet:
               path: /actuator/health/readiness
               port: 8080
-            initialDelaySeconds: 3
+            initialDelaySeconds: ${{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: 3
           {{- end}}
           env:
           {{- if .Values.db.enabled }}
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.name }}-db-secret
-                  key: DB_USERNAME
-
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.name }}-db-secret
                   key: DB_PASSWORD
-
-            - name: DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.name }}-db-secret
-                  key: DB_NAME
-
-            - name: DB_HOST
-              value: "postgres-service.postgres.svc.cluster.local"
           {{- end}}
 
           {{- if .Values.configserver.enabled }}
             - name: CONFIG_SERVER_URI
               value: {{ .Values.configserver.uri }}
-          {{- end}}
-          {{- if .Values.rabbitmq.enabled }}
-            - name: RABBIT_HOST
-              value: {{ .Values.rabbitmq.host }}
-              
-            - name: RABBIT_PORT
-              value: "{{ .Values.rabbitmq.port }}"
-          {{- end}}
-            
+          {{- end}}  
             - name: JAEGER_URL
               value: "http://jaeger.linkerd-jaeger:14268/api/traces"

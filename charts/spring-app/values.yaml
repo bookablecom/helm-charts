@@ -1,6 +1,6 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/organization-service:v1.11.11
+image: ghcr.io/bookablecom/organization-service:v1.11.12
 
 name: "spring-app"
 
@@ -17,9 +17,11 @@ ingressroute:
 
 livenessProbe:
   enabled: true
+  initialDelaySeconds: 20
 
 readinessProbe:
   enabled: true
+  initialDelaySeconds: 30
 
 imagePullSecret:
   enabled: true
@@ -27,14 +29,7 @@ imagePullSecret:
 
 db:
   enabled: true
-  username: ""
   password: ""
-  dbname: ""
-
-rabbitmq:
-  enabled: true
-  host: "rabbitmq.rabbitmq.svc.cluster.local"
-  port: "5672"
 
 configserver:
   enabled: true
