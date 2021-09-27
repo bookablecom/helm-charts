@@ -31,7 +31,7 @@ spec:
             httpGet:
               path: /actuator/health/liveness
               port: 8080
-            initialDelaySeconds: ${{ .Values.livenessProbe.initialDelaySeconds }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: 3
           {{- end}}
           {{- if .Values.readinessProbe.enabled }}
@@ -39,7 +39,7 @@ spec:
             httpGet:
               path: /actuator/health/readiness
               port: 8080
-            initialDelaySeconds: ${{ .Values.readinessProbe.initialDelaySeconds }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: 3
           {{- end}}
           env:
