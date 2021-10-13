@@ -11,17 +11,20 @@ service:
   type: ClusterIP
   port: 8080
 
+mesh:
+  enabled: true
+
 ingressroute:
   enabled: true
   match: Host(`api.bsgrd.com`) && PathPrefix(`/`)
 
 livenessProbe:
   enabled: true
-  initialDelaySeconds: 20
+  initialDelaySeconds: 60
 
 readinessProbe:
   enabled: true
-  initialDelaySeconds: 30
+  initialDelaySeconds: 60
 
 imagePullSecret:
   enabled: true

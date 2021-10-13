@@ -11,6 +11,10 @@ spec:
       app: {{ .Values.name }}
   template:
     metadata:
+      {{- if .Values.db.enabled }}
+      annotations:
+        linkerd.io/inject: enabled
+      {{- end}}
       labels:
         app: {{ .Values.name }}
     spec:
@@ -54,6 +58,4 @@ spec:
           {{- if .Values.configserver.enabled }}
             - name: CONFIG_SERVER_URI
               value: {{ .Values.configserver.uri }}
-          {{- end}}  
-            - name: JAEGER_URL
-              value: "http://jaeger.linkerd-jaeger:14268/api/traces"
+          {{- end}}
