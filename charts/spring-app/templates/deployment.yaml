@@ -11,7 +11,7 @@ spec:
       app: {{ .Values.name }}
   template:
     metadata:
-      {{- if .Values.db.enabled }}
+      {{- if .Values.mesh.enabled }}
       annotations:
         linkerd.io/inject: enabled
       {{- end}}
