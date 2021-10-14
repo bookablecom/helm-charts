@@ -1,8 +1,12 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/config-server:1.0.0
+image: ghcr.io/bookablecom/config-server:1.1.0
 
 fullnameOverride: "config-server"
+name: "config-server"
+
+mesh:
+  enabled: true
 
 serviceAccount:
   create: true
@@ -10,3 +14,7 @@ serviceAccount:
 service:
   type: ClusterIP
   port: 8080
+
+github:
+  username: 
+  password: 

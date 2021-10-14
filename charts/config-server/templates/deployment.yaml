@@ -11,6 +11,10 @@ spec:
       app: {{ .Chart.Name }}
   template:
     metadata:
+      {{- if .Values.mesh.enabled }}
+      annotations:
+        linkerd.io/inject: enabled
+      {{- end}}
       labels:
         app: {{ .Chart.Name }}
     spec:
