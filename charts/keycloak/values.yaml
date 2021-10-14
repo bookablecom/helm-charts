@@ -2,10 +2,20 @@ replicaCount: 1
 
 image: richardjkendall/keycloak-arm
 
-fullnameOverride: "keycloak"
+name: "keycloak"
 
 serviceAccount:
   create: true
+
+db:
+  enabled: true
+  username: keycloak
+  password: 
+  dbname: keycloak
+
+admin:
+  username: user
+  password: 
 
 service:
   type: ClusterIP
