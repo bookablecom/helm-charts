@@ -1,5 +1,8 @@
 name: rabbitmq
+namespace: rabbitmq
 management:
   port: 15672
 service:
   port: 5672
+mesh:
+  enabled: true
