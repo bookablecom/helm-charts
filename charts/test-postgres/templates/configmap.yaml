@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-db
+  namespace: default
+data:
+  createdb.sql: |
+    CREATE USER keycloak WITH ENCRYPTED PASSWORD 'keycloak';
+    CREATE DATABASE keycloak;
+    GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;
+
+    CREATE USER usersvc WITH ENCRYPTED PASSWORD 'usersvc';
+    CREATE DATABASE usersvc;
+    GRANT ALL PRIVILEGES ON DATABASE usersvc TO usersvc;
+
+    CREATE USER organizationsvc WITH ENCRYPTED PASSWORD 'organizationsvc';
+    CREATE DATABASE organizationsvc;
+    GRANT ALL PRIVILEGES ON DATABASE organizationsvc TO organizationsvc;
