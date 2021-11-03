@@ -11,7 +11,7 @@ serviceAccount:
 
 spring:
   profiles:
-    active: local
+    active: default
 
 service:
   enabled: true
