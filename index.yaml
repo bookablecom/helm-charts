@@ -3,6 +3,16 @@ entries:
   config-server:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-11-03T07:27:55.039404702Z"
+    description: A Helm chart for Kubernetes
+    digest: 68e16c19748b1ed2122796ff0792bc877da33db7f3b89b79146bdafac376fc25
+    name: config-server
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/config-server-2.1.1/config-server-2.1.1.tgz
+    version: 2.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-10-14T09:51:20.583226615Z"
     description: A Helm chart for Kubernetes
     digest: 25079fb919af803fc56fd1bb2fa7373749d5d2d2a2cafc1371aa3b76a0de3d86
@@ -169,6 +179,16 @@ entries:
   spring-app:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-11-03T07:27:55.239367003Z"
+    description: A Helm chart a spring application
+    digest: 3ea861f263efd7b1e7e6dd80b16c07c2ddc7761491bf6a916a3fbc7c64fc4659
+    name: spring-app
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/spring-app-0.2.0/spring-app-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-10-14T09:51:21.242557836Z"
     description: A Helm chart a spring application
     digest: 60cd345a1b0f53239be628baa451b19e5dd65697e09860b2ede79b3f5ab9da6b
@@ -238,6 +258,16 @@ entries:
     - https://github.com/bookablecom/helm-charts/releases/download/spring-app-0.1.1/spring-app-0.1.1.tgz
     version: 0.1.1
   test-postgres:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-11-03T07:27:55.433757385Z"
+    description: A Helm chart for Kubernetes
+    digest: 2adfb02df7deb03f32032e827cb6f8d9c48f6891c5c8a4810f11ddf353f0d552
+    name: test-postgres
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/test-postgres-0.2.0/test-postgres-0.2.0.tgz
+    version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-10-14T09:51:21.400743752Z"
@@ -329,4 +359,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/user-service-0.1.0/user-service-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-14T09:51:21.400826053Z"
+generated: "2021-11-03T07:27:55.433843685Z"
