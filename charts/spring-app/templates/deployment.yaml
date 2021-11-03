@@ -25,7 +25,7 @@ spec:
       {{- end}}
       containers:
         - name: {{ .Values.name }}
-          image: {{ .Values.image }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           ports:
             - name: http
               containerPort: 8080
@@ -47,14 +47,8 @@ spec:
             periodSeconds: 3
           {{- end}}
           env:
-          {{- if .Values.db.enabled }}
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.name }}-db-secret
-                  key: DB_PASSWORD
-          {{- end}}
-
+            - name: SPRING_PROFILES_ACTIVE
+              value: {{ .Values.spring.profiles.active }}
           {{- if .Values.configserver.enabled }}
             - name: CONFIG_SERVER_URI
               value: {{ .Values.configserver.uri }}

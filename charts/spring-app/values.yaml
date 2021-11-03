@@ -1,20 +1,27 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/organization-service:v1.11.12
+image: 
+  repository: ghcr.io/bookablecom/organization-service
+  tag: v1.11.12
 
 name: "spring-app"
 
 serviceAccount:
   create: true
 
+spring:
+  profiles:
+    active: local
+
 service:
+  enabled: true
   type: ClusterIP
   port: 8080
 
 mesh:
   enabled: true
 
-ingressroute:
+ingress:
   enabled: true
   match: Host(`api.bsgrd.com`) && PathPrefix(`/`)
 
@@ -29,10 +36,6 @@ readinessProbe:
 imagePullSecret:
   enabled: true
   secretName: dockerconfigjson-github-com
-
-db:
-  enabled: true
-  password: ""
 
 configserver:
   enabled: true

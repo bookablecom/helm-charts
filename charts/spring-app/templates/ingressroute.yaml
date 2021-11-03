@@ -1,4 +1,4 @@
-{{- if .Values.ingressroute.enabled }}
+{{- if .Values.ingress.enabled }}
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: {{ .Values.ingressroute.match }}
+    - match: {{ .Values.ingress.match }}
       kind: Rule
       services:
         - name: {{ .Values.name }}
