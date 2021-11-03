@@ -41,5 +41,14 @@ spec:
                   name: config-server-github-secret
                   key: GITHUB_PASSWORD
 
+            - name: VAULT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: config-server-vault-secret
+                  key: VAULT_TOKEN
+
             - name: CONFIG_REPO_URI
-              value: https://github.com/bookablecom/configurations
+              value: {{ .Values.configserver.repo_uri }}
+
+            - name: VAULT_HOST
+              value: {{ .Values.vault.host }}

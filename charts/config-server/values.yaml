@@ -1,6 +1,6 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/config-server:1.1.0
+image: ghcr.io/bookablecom/config-server:2.0.3
 
 fullnameOverride: "config-server"
 name: "config-server"
@@ -15,6 +15,13 @@ service:
   type: ClusterIP
   port: 8080
 
+configserver:
+  repo_uri: https://github.com/bookablecom/configurations
+
 github:
-  username: 
-  password: 
+  username: ""
+  password: ""
+
+vault:
+  host: vault.default.svc.cluster.local
+  token: ""
