@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres-service
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
 spec:
   replicas: 1
-  serviceName: postgres-service
+  serviceName: {{ .Values.name }}
   selector:
     matchLabels:
-      app: postgres-service
+      app: {{ .Values.name }}
   template:
     metadata:
       labels:
-        app: postgres-service
+        app: {{ .Values.name }}
     spec:
       containers:
-      - name: postgres-service
+      - name: {{ .Values.name }}
         image: postgres:9.6.22-stretch
         ports:
           - containerPort: 5432
