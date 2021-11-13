@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: init-db
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.namespace.name }}
 data:
   createdb.sql: |
     CREATE USER keycloak WITH ENCRYPTED PASSWORD 'keycloak';
@@ -16,3 +16,15 @@ data:
     CREATE USER organizationsvc WITH ENCRYPTED PASSWORD 'organizationsvc';
     CREATE DATABASE organizationsvc;
     GRANT ALL PRIVILEGES ON DATABASE organizationsvc TO organizationsvc;
+
+    CREATE USER resourcesvc WITH ENCRYPTED PASSWORD 'resourcesvc';
+    CREATE DATABASE resourcesvc;
+    GRANT ALL PRIVILEGES ON DATABASE resourcesvc TO resourcesvc;
+
+    CREATE USER bookingsvc WITH ENCRYPTED PASSWORD 'bookingsvc';
+    CREATE DATABASE bookingsvc;
+    GRANT ALL PRIVILEGES ON DATABASE bookingsvc TO bookingsvc;
+
+    CREATE USER vault WITH ENCRYPTED PASSWORD 'vault';
+    CREATE DATABASE vault;
+    GRANT ALL PRIVILEGES ON DATABASE vault TO vault;
