@@ -1,5 +1,7 @@
 name: rabbitmq
-namespace: rabbitmq
+namespace: 
+  create: false
+  name: rabbitmq
 management:
   port: 15672
 service:
