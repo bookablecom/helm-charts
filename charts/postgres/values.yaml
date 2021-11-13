@@ -1,5 +1,7 @@
-name: postgres-service
-namespace: postgres
+name: postgres
+namespace: 
+  create: false
+  name: default
 ip: 192.168.86.116
 service:
   port: 5432
