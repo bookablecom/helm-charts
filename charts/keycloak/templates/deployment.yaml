@@ -41,7 +41,7 @@ spec:
               value: postgres
 
             - name: DB_ADDR
-              value: postgres-service.postgres.svc.cluster.local
+              value: {{ .Values.db.host }}
 
             - name: DB_USER
               valueFrom:
@@ -56,7 +56,10 @@ spec:
                   key: DB_PASSWORD
 
             - name: DB_DATABASE
-              value: keycloak
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-db-secret
+                  key: DB_NAME
 
             - name: DB_PORT
               value: "5432"
