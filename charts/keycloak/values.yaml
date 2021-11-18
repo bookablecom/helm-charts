@@ -1,6 +1,6 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/keycloak:1.0.1
+image: ghcr.io/bookablecom/keycloak:1.0.3
 
 name: keycloak
 

@@ -1,0 +1,350 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: linkerd-jaeger
+  labels:
+    linkerd.io/extension: jaeger
+  annotations:
+    linkerd.io/inject: enabled
+---
+###
+### Jaeger Injector
+###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    linkerd.io/extension: jaeger
+    app.kubernetes.io/name: jaeger-injector
+    app.kubernetes.io/part-of: Linkerd
+    app.kubernetes.io/version: stable-2.10.2
+    component: jaeger-injector
+  name: jaeger-injector
+  namespace: linkerd-jaeger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      linkerd.io/extension: jaeger
+      component: jaeger-injector
+  template:
+    metadata:
+      annotations:
+        checksum/config: 67517df21cf5a5ef5c7dc50451f5f7c12cc909f24ab6b665511dc91a4cfc31bc
+      labels:
+        linkerd.io/extension: jaeger
+        component: jaeger-injector
+    spec:
+      containers:
+      - args:
+        - -collector-svc-addr=collector.linkerd-jaeger:55678
+        - -collector-svc-account=collector
+        - -log-level=info
+        image: cr.l5d.io/linkerd/jaeger-webhook:stable-2.10.2
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 9995
+          initialDelaySeconds: 10
+        name: jaeger-injector
+        ports:
+        - containerPort: 8443
+          name: jaeger-injector
+        - containerPort: 9995
+          name: admin-http
+        readinessProbe:
+          failureThreshold: 7
+          httpGet:
+            path: /ready
+            port: 9995
+        volumeMounts:
+        - mountPath: /var/run/linkerd/tls
+          name: tls
+          readOnly: true
+      serviceAccountName: jaeger-injector
+      volumes:
+      - name: tls
+        secret:
+          secretName: jaeger-injector-k8s-tls
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: jaeger-injector
+  namespace: linkerd-jaeger
+  labels:
+    linkerd.io/extension: jaeger
+    component: jaeger-injector
+spec:
+  type: ClusterIP
+  selector:
+    linkerd.io/extension: jaeger
+    component: jaeger-injector
+  ports:
+  - name: jaeger-injector
+    port: 443
+    targetPort: jaeger-injector
+---
+###
+### collector RBAC
+###
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: collector
+  namespace: linkerd-jaeger
+---
+###
+### jaeger RBAC
+###
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: jaeger
+  namespace: linkerd-jaeger
+
+---
+###
+### Jaeger Injector RBAC
+###
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-jaeger-injector
+  labels:
+    linkerd.io/extension: jaeger
+rules:
+- apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["get", "list", "watch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-jaeger-injector
+  labels:
+    linkerd.io/extension: jaeger
+subjects:
+- kind: ServiceAccount
+  name: jaeger-injector
+  namespace: linkerd-jaeger
+  apiGroup: ""
+roleRef:
+  kind: ClusterRole
+  name: linkerd-jaeger-injector
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: jaeger-injector
+  namespace: linkerd-jaeger
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: jaeger-injector-k8s-tls
+  namespace: linkerd-jaeger
+type: kubernetes.io/tls
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURVekNDQWp1Z0F3SUJBZ0lSQUpZK3Y0bmQvTGd1N1loeGdZT3ZPeEV3RFFZSktvWklodmNOQVFFTEJRQXcKTFRFck1Da0dBMVVFQXhNaWFtRmxaMlZ5TFdsdWFtVmpkRzl5TG14cGJtdGxjbVF0YW1GbFoyVnlMbk4yWXpBZQpGdzB5TVRBMk1UWXhNalF6TVRkYUZ3MHlNakEyTVRZeE1qUXpNVGRhTUMweEt6QXBCZ05WQkFNVEltcGhaV2RsCmNpMXBibXBsWTNSdmNpNXNhVzVyWlhKa0xXcGhaV2RsY2k1emRtTXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUEKQTRJQkR3QXdnZ0VLQW9JQkFRQ3ZFR3lPVG5TRjByY1A5UUpVOEJ1eFduZzJmS3ZHOHVzenh5ZWZNRyt0UzdURQpVVXVNbVNmYitxN1dvTjlJTVYyS2JhUDh5QS9EU2JrNDU0VjJZM1RwaEc3VFJpeWNzSFlTWVA4UktKb1d3Z05MCjAzQk81SWJvMDBGRXJvSVJDZWlCMnZiTS9lL2V5cDBDcDRVS2trL2RhdXhvOHBRbU95NWlnT2wwT3hXWUNkMGYKMVRpQkk3cFFnNkRLWXAwUFFyY2NVYTZzZmMrRWFCZmRxTGdTZldHbGh5QkJTZmlZK09nc0ZEcWc4YWM1TXBYcQoySzJaSTFOUDFicC9vcXg2SFFTenhRcW56eTRoc3NRS1BndWtQWExrek12R2xZa3F6VVpGbUU0ay84Sm0raUgrCnZIbFNLdjZKbXUwTEVubENZNjFqN2V3WmhwVWVsbzFndUtlU0R1bXpBZ01CQUFHamJqQnNNQTRHQTFVZER3RUIKL3dRRUF3SUZvREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0RBWURWUjBUQVFILwpCQUl3QURBdEJnTlZIUkVFSmpBa2dpSnFZV1ZuWlhJdGFXNXFaV04wYjNJdWJHbHVhMlZ5WkMxcVlXVm5aWEl1CmMzWmpNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUJZM1dCZmMvY1JDRlFXUDlULzBtTEFuTW5WZDhqS3NrVk0KaVZCbEZrMDRCTDZtTjBBcFdYZFBrKzJoSnR0UGR5KzkvZWUyTlFkK25rUlVZREUzN0ZvMnV3S1I2RXJlTVdHdwo4WXdyY09QUDJUaDdVS0JnMzlXM2V6UTVlRDMvWk9sdkJNWFZqekFNcGtvL21FM2lseUhpWEY1YzkzWnl3WVR0CmRHVWViUUNqVkVVRW1BQTV5aFhQTzdGWlpGRS9uWTB5N0h2cTRGdFlPT0JFNHdUTXNJZG1TRVFTRHBMMkxubnQKWTJWNzE4bE8yYmUwYlVHdFVFaWIxSVNiaFZMc2U4OTB0K1QxUFpySzlKTUJmRUJnaUFDTmUrdHBDMWFRZGJ5RworMFhTTmd4R0NIODJKSVFWRktLMzFTRDdQKy8vNTJvSTRLVzR3RVgraTY1OHMzcnNJczFzCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBcnhCc2prNTBoZEszRC9VQ1ZQQWJzVnA0Tm55cnh2THJNOGNubnpCdnJVdTB4RkZMCmpKa24yL3F1MXFEZlNERmRpbTJqL01nUHcwbTVPT2VGZG1OMDZZUnUwMFlzbkxCMkVtRC9FU2lhRnNJRFM5TncKVHVTRzZOTkJSSzZDRVFub2dkcjJ6UDN2M3NxZEFxZUZDcEpQM1dyc2FQS1VKanN1WW9EcGREc1ZtQW5kSDlVNApnU082VUlPZ3ltS2REMEszSEZHdXJIM1BoR2dYM2FpNEVuMWhwWWNnUVVuNG1Qam9MQlE2b1BHbk9US1Y2dGl0Cm1TTlRUOVc2ZjZLc2VoMEVzOFVLcDg4dUliTEVDajRMcEQxeTVNekx4cFdKS3MxR1JaaE9KUC9DWnZvaC9yeDUKVWlyK2lacnRDeEo1UW1PdFkrM3NHWWFWSHBhTllMaW5rZzdwc3dJREFRQUJBb0lCQUM4RTJFTTRheTl1TXVERQpTNFlJbjBkNUp3UnJZNitobXU1ak5ROGFjVVE0S3lyM01yVm1oVUFlQ2t0M0ZjRk1FUFdYRVE1WnBYSXNJT1ZaCnVZemNsWkFLazhHRy9ZQndIS1kvQ3dMT3h1UUo0OXkvdzFCTkxMYm4xb1hkNE8wMm5nNFNnMnIzWVMrVGQ2dzQKMWhES3oweUc1VXdpcXd2QnBXbXJlZ2hQdmpNQk1TKzdsb2E0WTkyMjFqVEIzRmxQTWtSRktwRGdabDVBMEwyagp6dWNjOC90czJNa3BoNnNGenFkV0pKSWUvSW1WVldHWFhab2pRNkRTOWV1WFpNL0E5d0kvU3FJQ2p1b2M3WExxCnZldzZwR3pnQzJkMnowOVpPUXFFK2hxMS9lMklINEpsQWtQclFSdE40NVhTNnUvSkt4aHdyZFZjS1ZySFAzT2gKb0tPWXFBRUNnWUVBNDYvdCtNL3MvTDNKR1lpNytiSFhkV1gwSFgxQzJhTmNIRVJmb2NSdWdNMmx5djZ0Mnh6QQpweUVEbTFkTExyeXpSQy9vUlZHMnhQNWRFR2hkMTdMM1pUbFVzWHB0ZVlaRkNxUVJmMmxZVFZOb3BVUENVZkl1CktPK0xiOTZMcjI1TUh0eVZOUWE5RmhZNTZkRFh6d2hybEFYQXRPM1h6NHVsdlVJdWFxdTd1Z0VDZ1lFQXhOVlMKRGdHUnppYk5xMDFJOWNESjhXakVuTUsvbzlleFJmQ29HOEtPV25QN044dFlsenpuVmtvazlLOWdSYzZ6WnJCZQprdVpKdGw3ZlJrLzRlR2g0VmthM2U5d2Zac0pLdlBxcDJFOGh3WHdJdVZvM05TZFY5QjlzYVhiRU92SFg2WTdSCkw5eVZYVzdUcWJxa3cvVnY3VjB3NEdiWTBuSTFWd3M5UFRPdDI3TUNnWUJDL1RZVTZJZ2ZiRzlJZGZSb2FLeXQKdTh0eENiT3JlT2JXNGo4SXgxU0R6UDJrbGYzczQ2N0MvWEdrT0xERUZYemc2UDk3dGFrQ21Kd2xBYS9xa0pzOQpTdnJpSk5VazFoNW1IUk9RMnh2QjFIS0xmVDRsQWc0V3VUUGJQQ3o0OW9pcTQ5ZDZmSHNSam9TSGlJeVdPekg3Cm9SMnJuZmJLOTVsUjc3RGNiWjZVQVFLQmdIOHd6WVlwYzN1QVRaU3RLMEZLby9Qd1hHUmo0QXhTdThYVEhmNWEKT1R5d0I1emxOTWo5M1F0QWZDTDFGTVBuTHJ4anFhbEpVRWFkaGEvY3kxV2JSRytUNE1zVDBlTElHQjJINktyVApiNStrczhwNlJvUjlkNmg1aWNlWXJITGVoa1B4T3JHdjI0RDF0YWJPNmR1S3hSbmdCMDVxaHg5dUY1TzR1b2pLCjFVVExBb0dBV2g1R2VSeEJ2T2tQM3FMYUo1ZGI0V01HZnVuZ2RHQWp4cnYvVERoWWwvbkVnRkRPNUk4YWxDanYKM2dXQk51YTZlUkhCbXZuTUlzeDRsV2ZFZGRnVURDUDlDaWFIc1BtVXRJRlZNYVgrdjdzS2hrdU84N2ZxLyttRwpPNUJZM1MrMkhDbXVyRUpiUld3NlNRRU9ZSDFMQ0dRWjJkaFY1NS90cUhYQmFiZWljWnM9Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: linkerd-jaeger-injector-webhook-config
+  labels:
+    linkerd.io/extension: jaeger
+webhooks:
+- name: jaeger-injector.linkerd.io
+  clientConfig:
+    service:
+      name: jaeger-injector
+      namespace: linkerd-jaeger
+      path: "/"
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURVekNDQWp1Z0F3SUJBZ0lSQUpZK3Y0bmQvTGd1N1loeGdZT3ZPeEV3RFFZSktvWklodmNOQVFFTEJRQXcKTFRFck1Da0dBMVVFQXhNaWFtRmxaMlZ5TFdsdWFtVmpkRzl5TG14cGJtdGxjbVF0YW1GbFoyVnlMbk4yWXpBZQpGdzB5TVRBMk1UWXhNalF6TVRkYUZ3MHlNakEyTVRZeE1qUXpNVGRhTUMweEt6QXBCZ05WQkFNVEltcGhaV2RsCmNpMXBibXBsWTNSdmNpNXNhVzVyWlhKa0xXcGhaV2RsY2k1emRtTXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUEKQTRJQkR3QXdnZ0VLQW9JQkFRQ3ZFR3lPVG5TRjByY1A5UUpVOEJ1eFduZzJmS3ZHOHVzenh5ZWZNRyt0UzdURQpVVXVNbVNmYitxN1dvTjlJTVYyS2JhUDh5QS9EU2JrNDU0VjJZM1RwaEc3VFJpeWNzSFlTWVA4UktKb1d3Z05MCjAzQk81SWJvMDBGRXJvSVJDZWlCMnZiTS9lL2V5cDBDcDRVS2trL2RhdXhvOHBRbU95NWlnT2wwT3hXWUNkMGYKMVRpQkk3cFFnNkRLWXAwUFFyY2NVYTZzZmMrRWFCZmRxTGdTZldHbGh5QkJTZmlZK09nc0ZEcWc4YWM1TXBYcQoySzJaSTFOUDFicC9vcXg2SFFTenhRcW56eTRoc3NRS1BndWtQWExrek12R2xZa3F6VVpGbUU0ay84Sm0raUgrCnZIbFNLdjZKbXUwTEVubENZNjFqN2V3WmhwVWVsbzFndUtlU0R1bXpBZ01CQUFHamJqQnNNQTRHQTFVZER3RUIKL3dRRUF3SUZvREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0RBWURWUjBUQVFILwpCQUl3QURBdEJnTlZIUkVFSmpBa2dpSnFZV1ZuWlhJdGFXNXFaV04wYjNJdWJHbHVhMlZ5WkMxcVlXVm5aWEl1CmMzWmpNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUJZM1dCZmMvY1JDRlFXUDlULzBtTEFuTW5WZDhqS3NrVk0KaVZCbEZrMDRCTDZtTjBBcFdYZFBrKzJoSnR0UGR5KzkvZWUyTlFkK25rUlVZREUzN0ZvMnV3S1I2RXJlTVdHdwo4WXdyY09QUDJUaDdVS0JnMzlXM2V6UTVlRDMvWk9sdkJNWFZqekFNcGtvL21FM2lseUhpWEY1YzkzWnl3WVR0CmRHVWViUUNqVkVVRW1BQTV5aFhQTzdGWlpGRS9uWTB5N0h2cTRGdFlPT0JFNHdUTXNJZG1TRVFTRHBMMkxubnQKWTJWNzE4bE8yYmUwYlVHdFVFaWIxSVNiaFZMc2U4OTB0K1QxUFpySzlKTUJmRUJnaUFDTmUrdHBDMWFRZGJ5RworMFhTTmd4R0NIODJKSVFWRktLMzFTRDdQKy8vNTJvSTRLVzR3RVgraTY1OHMzcnNJczFzCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+  failurePolicy: Ignore
+  admissionReviewVersions: ["v1", "v1beta1"]
+  reinvocationPolicy: IfNeeded
+  rules:
+  - operations: [ "CREATE" ]
+    apiGroups: [""]
+    apiVersions: ["v1"]
+    resources: ["pods"]
+  sideEffects: None
+---
+###
+### Tracing Collector Service
+###
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: collector-config
+  namespace: linkerd-jaeger
+  labels:
+    component: collector
+data:
+  collector-config: |
+    receivers:
+      opencensus:
+        port: 55678
+      zipkin:
+        port: 9411
+      jaeger:
+        jaeger-thrift-http-port: 14268
+    queued-exporters:
+      jaeger-all-in-one:
+        num-workers: 4
+        queue-size: 100
+        retry-on-failure: true
+        sender-type: jaeger-thrift-http
+        jaeger-thrift-http:
+          collector-endpoint: http://jaeger.linkerd-jaeger:14268/api/traces
+          timeout: 5s
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: collector
+  namespace: linkerd-jaeger
+  labels:
+    component: collector
+spec:
+  type: ClusterIP
+  ports:
+  - name: opencensus
+    port: 55678
+    protocol: TCP
+    targetPort: 55678
+  - name: zipkin
+    port: 9411
+    protocol: TCP
+    targetPort: 9411
+  - name: jaeger
+    port: 14268
+    protocol: TCP
+    targetPort: 14268
+  selector:
+    component: collector
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: collector
+    app.kubernetes.io/part-of: Linkerd
+    component: collector
+  name: collector
+  namespace: linkerd-jaeger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: collector
+  minReadySeconds: 5
+  progressDeadlineSeconds: 120
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8888"
+        prometheus.io/scrape: "true"
+      labels:
+        component: collector
+    spec:
+      containers:
+      - command:
+        - /occollector_linux
+        - --config=/conf/collector-config.yaml
+        env:
+        - name: GOGC
+          value: "80"
+        image: cloudeyes/opencensus-collector:aarch64
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 13133
+        name: oc-collector
+        ports:
+        - containerPort: 55678
+        - containerPort: 9411
+        - containerPort: 14268
+        - containerPort: 8888
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 13133
+        volumeMounts:
+        - mountPath: /conf
+          name: collector-config-val
+      serviceAccountName: collector
+      volumes:
+      - configMap:
+          items:
+          - key: collector-config
+            path: collector-config.yaml
+          name: collector-config
+        name: collector-config-val
+---
+###
+### Tracing Jaeger Service
+###
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger
+  namespace: linkerd-jaeger
+  labels:
+    component: jaeger
+spec:
+  type: ClusterIP
+  selector:
+    component: jaeger
+  ports:
+    - name: collection
+      port: 14268
+    - name: ui
+      port: 16686
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: jaeger
+    app.kubernetes.io/part-of: Linkerd
+    component: jaeger
+  name: jaeger
+  namespace: linkerd-jaeger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: jaeger
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "14269"
+        prometheus.io/scrape: "true"
+      labels:
+        component: jaeger
+    spec:
+      containers:
+      - args:
+        - --query.base-path=/jaeger
+        image: thomasmatbalenaio/jaegertracing-all-in-one-arm64:latest
+        imagePullPolicy: Always
+        name: jaeger
+        ports:
+        - containerPort: 14269
+          name: admin
+        - containerPort: 14268
+          name: collection
+        - containerPort: 16686
+          name: ui
+      dnsPolicy: ClusterFirst
+      serviceAccountName: jaeger

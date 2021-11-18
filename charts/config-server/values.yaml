@@ -1,12 +1,12 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/config-server:2.0.3
+image: ghcr.io/bookablecom/config-server:2.1.0
 
 fullnameOverride: "config-server"
 name: "config-server"
 
 mesh:
-  enabled: true
+  enabled: false
 
 serviceAccount:
   create: true
@@ -19,9 +19,9 @@ configserver:
   repo_uri: https://github.com/bookablecom/configurations
 
 github:
-  username: ""
-  password: ""
+  username: "kasper.bisgaard@live.com"
+  password: "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"
 
 vault:
   host: vault.default.svc.cluster.local
-  token: ""
+  token: "root"
