@@ -3,6 +3,16 @@ entries:
   config-server:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-12-02T08:26:21.581810558Z"
+    description: A Helm chart for Kubernetes
+    digest: 5cd9c35d6a5f6112b8fd97b11ba78f9a09709de40ec0efadc060cdadeb432ac2
+    name: config-server
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/config-server-2.1.2/config-server-2.1.2.tgz
+    version: 2.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-11-03T07:27:55.039404702Z"
     description: A Helm chart for Kubernetes
     digest: 68e16c19748b1ed2122796ff0792bc877da33db7f3b89b79146bdafac376fc25
@@ -409,4 +419,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/user-service-0.1.0/user-service-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-13T08:43:18.920739737Z"
+generated: "2021-12-02T08:26:21.581893359Z"
