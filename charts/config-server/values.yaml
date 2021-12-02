@@ -1,9 +1,13 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/config-server:2.0.3
+image: ghcr.io/bookablecom/config-server:2.2.1
 
 fullnameOverride: "config-server"
 name: "config-server"
+
+spring:
+  profiles:
+    active: git,vault
 
 mesh:
   enabled: true
