@@ -5,11 +5,13 @@ metadata:
   name: {{ .Values.name }}-route
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: {{ .Values.ingress.match }}
       kind: Rule
       services:
         - name: {{ .Values.name }}
           kind: TraefikService
+  tls:
+    certResolver: letsencrypt
 {{- end}}
