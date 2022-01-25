@@ -1,6 +1,6 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/keycloak:1.0.1
+image: koolwithk/keycloak-arm:16.0.0
 
 name: keycloak
 
@@ -8,20 +8,20 @@ serviceAccount:
   create: true
 
 db:
-  enabled: true
-  host: postgres.default.svc.cluster.local
-  username: keycloak
-  password: keycloak
-  dbname: keycloak
+  vendor: postgres
+  host: postgres.postgres.svc.cluster.local
+  user: ""
+  password: ""
+  database: keycloak
+
+admin:
+  keycloakUser: ""
+  keycloakPassword: ""
 
 ingress:
   enabled: true
   match: Host(`auth.bsgrd.com`)
 
-admin:
-  username: ""
-  password: ""
-
 service:
   type: ClusterIP
-  port: 8080
+  port: 8443

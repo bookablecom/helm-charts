@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-config
+data:
+  KK_TO_RMQ_URL: rabbitmq.rabbitmq.svc.cluster.local
+  KK_TO_RMQ_PORT: "5672"
+  KK_TO_RMQ_VHOST: "/"
+  KK_TO_RMQ_EXCHANGE: keycloak_events
+  KK_TO_RMQ_USERNAME: keycloak
+  KK_TO_RMQ_PASSWORD: keycloak
+  KK_TO_RMQ_USE_TLS: "false"
+  DB_PORT: "5432"
+  HTTP_PROXY_ADDRESS_FORWARDING: "true"
+  PROXY_ADDRESS_FORWARDING: "true"

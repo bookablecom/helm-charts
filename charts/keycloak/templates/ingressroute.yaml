@@ -5,11 +5,14 @@ metadata:
   name: {{ .Chart.Name }}-route
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
   - match: {{ .Values.ingress.match }}
     kind: Rule
     services:
     - name: {{ .Chart.Name }}
-      port: {{ .Values.service.port }}
+      kind: Service
+      port: 80
+  tls:
+    certResolver: letsencrypt
 {{- end}}

@@ -1,0 +1,20 @@
+image: 
+  repository: ghcr.io/bookablecom/keycloak-initializer
+  tag: 0.0.5
+
+name: "keycloak-initializer"
+
+imagePullSecret:
+  enabled: true
+  secretName: dockerconfigjson-github-com
+
+serviceAccount:
+  create: true
+
+spring:
+  profiles:
+    active: default
+
+configserver:
+  enabled: true
+  uri: "http://config-server.default.svc.cluster.local:8080"

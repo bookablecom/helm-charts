@@ -24,42 +24,21 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          env:
-            - name: KEYCLOAK_USER
-              valueFrom:
-                secretKeyRef:
-                  name: keycloak-admin-user-secret
-                  key: KEYCLOAK_USER
-
-            - name: KEYCLOAK_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: keycloak-admin-user-secret
-                  key: KEYCLOAK_PASSWORD
-            
-            - name: DB_VENDOR
-              value: postgres
-
-            - name: DB_ADDR
-              value: {{ .Values.db.host }}
-
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: keycloak-db-secret
-                  key: DB_USERNAME
-
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: keycloak-db-secret
-                  key: DB_PASSWORD
-
-            - name: DB_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: keycloak-db-secret
-                  key: DB_NAME
-
-            - name: DB_PORT
-              value: "5432"
+            - name: https
+              containerPort: 8443
+              protocol: TCP
+          volumeMounts:
+            - name: keycloak-plugin
+              mountPath: /opt/jboss/keycloak/standalone/deployments/keycloak-to-rabbit-2.1.jar
+              subPath: keycloak-to-rabbit-2.1.jar
+          envFrom:
+            - secretRef:
+                name: {{ .Values.name }}-db-secret
+            - secretRef:
+                name: {{ .Values.name }}-admin-user-secret
+            - configMapRef:
+                name: keycloak-config
+      volumes:
+        - name: keycloak-plugin
+          configMap:
+            name: keycloak-plugin
