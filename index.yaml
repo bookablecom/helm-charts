@@ -65,6 +65,16 @@ entries:
   keycloak:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-01-25T14:56:04.604110357Z"
+    description: A Helm chart for Kubernetes
+    digest: 0484a6dc1feee2846a1ea9ea7732ab28233473b443f4b76d25e421f5d397025b
+    name: keycloak
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/keycloak-2.0.0/keycloak-2.0.0.tgz
+    version: 2.0.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-11-13T08:19:18.887066591Z"
     description: A Helm chart for Kubernetes
     digest: bffdbabfd2ebc78f515f23757310272aeb274e52dc6d78e486dc503615d6b08f
@@ -103,6 +113,17 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/keycloak-1.0.0/keycloak-1.0.0.tgz
     version: 1.0.0
+  keycloak-initializer:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-01-25T14:56:04.815036256Z"
+    description: A Helm chart for Kubernetes
+    digest: 3f56a0e7c6362aea452f8c4997ee133d1c641d2beb62f08a83d85a72b8c46fcf
+    name: keycloak-initializer
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/keycloak-initializer-0.1.0/keycloak-initializer-0.1.0.tgz
+    version: 0.1.0
   organization-service:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -429,4 +450,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/user-service-0.1.0/user-service-0.1.0.tgz
     version: 0.1.0
-generated: "2022-01-20T16:29:17.938939815Z"
+generated: "2022-01-25T14:56:04.815128658Z"
