@@ -209,6 +209,16 @@ entries:
   rabbitmq:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-04-06T13:11:17.843975223Z"
+    description: A Helm chart for Kubernetes
+    digest: fe78424800443df26e5258aa40371fc100307fe3098268d657bc4c7a4ee230c9
+    name: rabbitmq
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/rabbitmq-1.0.3/rabbitmq-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-11-13T08:43:18.920664435Z"
     description: A Helm chart for Kubernetes
     digest: 6852f8d156f0d03ffc3dd13c830bb57ea8a65abd98dacac2fecf563c9c34a48b
@@ -450,4 +460,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/user-service-0.1.0/user-service-0.1.0.tgz
     version: 0.1.0
-generated: "2022-01-25T14:56:04.815128658Z"
+generated: "2022-04-06T13:11:17.844220626Z"
