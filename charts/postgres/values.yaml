@@ -1,7 +1,10 @@
+replicaCount: 1
 name: postgres
 namespace: 
-  create: false
-  name: default
-ip: 192.168.86.116
+  create: true
+  name: postgres
+image:
+  repository: postgres:9.6.22-stretch
+  pullPolicy: IfNotPresent
 service:
   port: 5432
