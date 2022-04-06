@@ -9,6 +9,7 @@ spec:
   selector:
     matchLabels:
       app: rabbitmq
+  
   template:
     metadata:
       {{- if .Values.mesh.enabled }}
@@ -18,6 +19,7 @@ spec:
       labels:
         app: rabbitmq
     spec:
+      serviceAccountName: {{ .Values.namespace.name }}
       containers:
       - name: rabbitmq
         image: rabbitmq:3-management
@@ -30,10 +32,21 @@ spec:
         - name: "RABBITMQ_ERLANG_COOKIE"
           value: "1WqgH8N2v1qDBDZDbNy8Bg9IkPWLEpu79m6q+0t36lQ="
         volumeMounts:
+        - name: rabbitmq-conf
+          mountPath: /etc/rabbitmq/rabbitmq.conf
+          subPath: rabbitmq.conf
+        - name: rabbitmq-definitions
+          mountPath: /etc/rabbitmq/definitions.json
+          subPath: definitions.json
         - mountPath: /var/lib/rabbitmq
-          name: rabbitmq-data
+          name: rabbitmq-pvc
       volumes:
-        - name: rabbitmq-data
-          hostPath:
-            path: /data/rabbitmq
-            type: DirectoryOrCreate
+        - name: rabbitmq-conf
+          configMap:
+            name: rabbitmq-conf
+        - name: rabbitmq-definitions
+          configMap:
+            name: rabbitmq-definitions
+        - name: rabbitmq-pvc
+          persistentVolumeClaim:
+            claimName: rabbitmq-pvc

@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-definitions
+data:
+  definitions.json: "{\"users\":[{\"name\":\"rabbitmq\",\"password\":\"rabbitmq\",\"tags\":\"administrator\"},{\"name\":\"keycloak\",\"password\":\"keycloak\",\"tags\":\"administrator\"}],\"vhosts\":[{\"name\":\"/\"}],\"permissions\":[{\"user\":\"rabbitmq\",\"vhost\":\"/\",\"configure\":\".*\",\"write\":\".*\",\"read\":\".*\"},{\"user\":\"keycloak\",\"vhost\":\"/\",\"configure\":\".*\",\"write\":\".*\",\"read\":\".*\"}],\"exchanges\":[{\"name\":\"keycloak_events\",\"vhost\":\"/\",\"type\":\"topic\",\"durable\":true,\"auto_delete\":false,\"internal\":false,\"arguments\":{}}]}"
