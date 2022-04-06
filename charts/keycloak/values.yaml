@@ -10,8 +10,8 @@ serviceAccount:
 db:
   vendor: postgres
   host: postgres.postgres.svc.cluster.local
-  user: ""
-  password: ""
+  user: "keycloak"
+  password: "keycloak"
   database: keycloak
 
 admin:

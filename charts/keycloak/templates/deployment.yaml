@@ -15,8 +15,6 @@ spec:
         app: {{ .Chart.Name }}
     spec:
       serviceAccountName: {{ .Chart.Name }}
-      imagePullSecrets:
-        - name: dockerconfigjson-github-com
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image }}
