@@ -351,6 +351,16 @@ entries:
   test-postgres:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-04-06T13:36:55.693660536Z"
+    description: A Helm chart for Kubernetes
+    digest: e45f1108a72dda8a18f3ecd4625be94cf03268d1e79b64d41fe2241917fa3ef4
+    name: test-postgres
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/test-postgres-0.2.3/test-postgres-0.2.3.tgz
+    version: 0.2.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-11-13T08:19:19.21764119Z"
     description: A Helm chart for Kubernetes
     digest: 41ccbd0e1488aa0bf3b300ea3f3f30d341cdf4298d49be605d8d6e68b2550f3b
@@ -460,4 +470,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/user-service-0.1.0/user-service-0.1.0.tgz
     version: 0.1.0
-generated: "2022-04-06T13:11:17.844220626Z"
+generated: "2022-04-06T13:36:55.693829537Z"
