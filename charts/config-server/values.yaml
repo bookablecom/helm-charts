@@ -1,13 +1,13 @@
 replicaCount: 1
 
-image: ghcr.io/bookablecom/config-server:2.2.1
+image: ghcr.io/bookablecom/config-server:2.2.2
 
 fullnameOverride: "config-server"
 name: "config-server"
 
 spring:
   profiles:
-    active: git,vault
+    active: vault,git
 
 mesh:
   enabled: true
@@ -27,5 +27,5 @@ github:
   password: ""
 
 vault:
-  host: vault.default.svc.cluster.local
+  host: vault.vault.svc.cluster.local
   token: ""
