@@ -13,9 +13,9 @@ db:
     name: keycloak-db-secret
     vendor: postgres
     host: postgres.postgres.svc.cluster.local
-    user: "keycloak"
-    password: "keycloak"
-    database: "keycloak"
+    user: ""
+    password: ""
+    database: ""
 
 keycloak:
   admin:
