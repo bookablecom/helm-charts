@@ -31,9 +31,9 @@ spec:
               subPath: keycloak-to-rabbit-2.1.jar
           envFrom:
             - secretRef:
-                name: {{ .Values.name }}-db-secret
+                name: {{ .Values.db.secret.name }}
             - secretRef:
-                name: {{ .Values.name }}-admin-user-secret
+                name: {{ .Values.keycloak.admin.secret.name }}
             - configMapRef:
                 name: keycloak-config
       volumes:

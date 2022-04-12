@@ -8,15 +8,22 @@ serviceAccount:
   create: true
 
 db:
-  vendor: postgres
-  host: postgres.postgres.svc.cluster.local
-  user: "keycloak"
-  password: "keycloak"
-  database: keycloak
+  secret:
+    create: false
+    name: keycloak-db-secret
+    vendor: postgres
+    host: postgres.postgres.svc.cluster.local
+    user: "keycloak"
+    password: "keycloak"
+    database: "keycloak"
 
-admin:
-  keycloakUser: ""
-  keycloakPassword: ""
+keycloak:
+  admin:
+    secret:
+      create: false
+      name: keycloak-admin-user-secret
+      keycloakUser: ""
+      keycloakPassword: ""
 
 ingress:
   enabled: true
