@@ -19,13 +19,16 @@ service:
   type: ClusterIP
   port: 8080
 
-configserver:
-  repo_uri: https://github.com/bookablecom/configurations
-
 github:
-  username: ""
-  password: ""
-
-vault:
+  repo: https://github.com/bookablecom/configurations
+  secret:
+    name: config-server-github-secret
+    create: false
+    username: ""
+    password: ""
+vault: 
   host: vault.vault.svc.cluster.local
-  token: ""
+  secret:
+    name: config-server-vault-secret
+    create: false
+    token: ""

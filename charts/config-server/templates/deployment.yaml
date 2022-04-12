@@ -32,23 +32,23 @@ spec:
             - name: GITHUB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: config-server-github-secret
+                  name: {{ .Values.github.secret.name }}
                   key: GITHUB_USERNAME
 
             - name: GITHUB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: config-server-github-secret
+                  name: {{ .Values.github.secret.name }}
                   key: GITHUB_PASSWORD
 
             - name: VAULT_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: config-server-vault-secret
+                  name: {{ .Values.vault.secret.name }}
                   key: VAULT_TOKEN
 
             - name: CONFIG_REPO_URI
-              value: {{ .Values.configserver.repo_uri }}
+              value: {{ .Values.github.repo }}
 
             - name: SPRING_PROFILES_ACTIVE
               value: {{ .Values.spring.profiles.active }}
