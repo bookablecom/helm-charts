@@ -20,7 +20,12 @@ spec:
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
             imagePullPolicy: {{ .Values.image.pullPolicy }}
             args:          
-              {{  range .Values.arguments }}
-                - {{ . }}
-              {{ end }}
+              - unseal
+              - --address=$(VAULT_ADDRESS)
+              - --shard=$(VAULT_SHARD_1)
+              - --shard=$(VAULT_SHARD_2)
+              - --shard=$(VAULT_SHARD_3)
+            envFrom:
+            - secretRef:
+                name: {{ .Values.vault.secret.name }}
           restartPolicy: OnFailure

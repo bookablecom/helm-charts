@@ -14,12 +14,14 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
-arguments:
-  - unseal
-  - --address=
-  - --shard=***
-  - --shard=***
-  - --shard=***
+vault:
+  secret:
+    name: vault-unseal-cronjob-secret
+    create: false
+    vaultAddress: ""
+    shard1: ""
+    shard2: ""
+    shard3: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
