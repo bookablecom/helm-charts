@@ -533,6 +533,16 @@ entries:
   vault-unseal-cronjob:
   - apiVersion: v2
     appVersion: 1.0.1
+    created: "2022-04-13T07:45:07.654066604Z"
+    description: A Helm chart for Kubernetes
+    digest: e68ef1ede4435cd10f4304633f22066f66786c044ede898b5f648183229e94a5
+    name: vault-unseal-cronjob
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/vault-unseal-cronjob-1.0.0/vault-unseal-cronjob-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: 1.0.1
     created: "2022-04-06T13:46:54.064226193Z"
     description: A Helm chart for Kubernetes
     digest: 3e16c6fa37f2999a7a7f9d14fac9600a84207ec9fcccea7fc0b24ff4ddfe77fd
@@ -541,4 +551,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/vault-unseal-cronjob-0.1.0/vault-unseal-cronjob-0.1.0.tgz
     version: 0.1.0
-generated: "2022-04-12T14:42:50.429129211Z"
+generated: "2022-04-13T07:45:07.654289808Z"
