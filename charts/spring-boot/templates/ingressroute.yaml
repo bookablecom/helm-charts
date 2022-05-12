@@ -1,0 +1,19 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "spring-boot.fullname" . }}-route
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: {{ .Values.ingress.match }}
+      kind: Rule
+      services:
+        - name: {{ include "spring-boot.fullname" . }}
+          kind: TraefikService
+  {{- if .Values.ingress.tls.enabled }}
+  tls:
+    certResolver: {{ .Values.ingress.tls.resolver }}
+  {{- end }}
+{{- end}}
