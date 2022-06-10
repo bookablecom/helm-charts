@@ -335,6 +335,21 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/rabbitmq-1.0.0/rabbitmq-1.0.0.tgz
     version: 1.0.0
+  resource-service:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-06-10T11:24:35.888480733Z"
+    dependencies:
+    - name: spring-boot
+      repository: https://bookablecom.github.io/helm-charts
+      version: 0.2.2
+    description: A Helm chart for Kubernetes
+    digest: 5f0e3e949dab5ce0f8ce266d65f010a3918f79261640ae8617af1fea8226b6d7
+    name: resource-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/resource-service-2.0.0/resource-service-2.0.0.tgz
+    version: 2.0.0
   spring-app:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -648,4 +663,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/vault-unseal-cronjob-0.1.0/vault-unseal-cronjob-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-10T10:52:04.306131375Z"
+generated: "2022-06-10T11:24:35.888640234Z"
