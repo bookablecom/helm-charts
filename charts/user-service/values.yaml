@@ -1,0 +1,23 @@
+spring-boot:
+  fullnameOverride: "user-service"
+  image:
+    repository: ghcr.io/bookablecom/user-service
+    tag: 1.5.17
+  imagePullSecrets:
+    - name: "dockerconfigjson-github-com"
+  extraEnv:
+    CONFIG_SERVER_URI: http://config-server:8080
+  ingress:
+    enabled: true
+    match: Host(`api.bsgrd.com`) && PathPrefix(`/users`)
+  name: user-service
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 120
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 120
+  replicaCount: 1
+  spring:
+    profiles:
+      active: default
