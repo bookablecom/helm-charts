@@ -411,6 +411,16 @@ entries:
   spring-boot:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-06-10T09:20:25.766855815Z"
+    description: A Helm chart for Kubernetes
+    digest: 9d65ae8f64e1aaec7540a5de97a2c91f4e739790c273f0fa997f9a8a5ab9a793
+    name: spring-boot
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/spring-boot-0.2.0/spring-boot-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-05-12T11:40:55.18973043Z"
     description: A Helm chart for Kubernetes
     digest: ae3703b5a0d610f65338f05a0294000a8a8ae1a9f8e6ef489d65ea634ecc350f
@@ -562,4 +572,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/vault-unseal-cronjob-0.1.0/vault-unseal-cronjob-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-12T11:40:55.189848633Z"
+generated: "2022-06-10T09:20:25.766976215Z"
