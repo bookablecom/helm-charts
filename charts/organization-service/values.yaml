@@ -11,12 +11,18 @@ spring-boot:
     enabled: true
     match: Host(`api.bsgrd.com`) && PathPrefix(`/organizations`)
   name: organization-service
-  livenessProbe:
+  healthChecks:
     enabled: true
-    initialDelaySeconds: 120
-  readinessProbe:
-    enabled: true
-    initialDelaySeconds: 120
+    readinessProbe:
+      initialDelaySeconds: 120
+      periodSeconds: 40
+      timeoutSeconds: 15
+      failureThreshold: 60
+    livenessProbe:
+      initialDelaySeconds: 120
+      periodSeconds: 30
+      timeoutSeconds: 15
+      failureThreshold: 60
   replicaCount: 1
   spring:
     profiles:
