@@ -5,12 +5,13 @@ image:
   pullPolicy: IfNotPresent
   tag: ""
 
-imagePullSecrets: 
+imagePullSecrets:
   - name: ""
 
 nameOverride: ""
 fullnameOverride: ""
 
+extraEnv: {}
 serviceAccount:
   create: true
   annotations: {}
@@ -43,7 +44,7 @@ ingress:
   enabled: true
   match: "" #Host(`api.bsgrd.com`) && PathPrefix(`/`)
   annotations: {}
-  tls: 
+  tls:
     enabled: true
     resolver: "" #letsencrypt
 
