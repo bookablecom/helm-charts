@@ -1,4 +1,5 @@
 spring-boot:
+  nameOverride: resource-service
   fullnameOverride: "resource-service"
   image:
     repository: ghcr.io/bookablecom/resource-service

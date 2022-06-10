@@ -1,8 +1,9 @@
 spring-boot:
+  nameOverride: booking-service
   fullnameOverride: "booking-service"
   image:
     repository: ghcr.io/bookablecom/booking-service
-    tag: 0.0.15
+    tag: 0.0.19
   imagePullSecrets:
     - name: "dockerconfigjson-github-com"
   extraEnv:
@@ -11,6 +12,7 @@ spring-boot:
     enabled: true
     match: Host(`api.bsgrd.com`) && PathPrefix(`/bookings`)
   name: booking-service
+  nameOverride: booking-service
   healthChecks:
     enabled: true
     readinessProbe:

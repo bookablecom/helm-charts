@@ -1,4 +1,5 @@
 spring-boot:
+  nameOverride: user-service
   fullnameOverride: "user-service"
   image:
     repository: ghcr.io/bookablecom/user-service

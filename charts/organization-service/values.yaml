@@ -1,4 +1,5 @@
 spring-boot:
+  nameOverride: organization-service
   fullnameOverride: "organization-service"
   image:
     repository: ghcr.io/bookablecom/organization-service
