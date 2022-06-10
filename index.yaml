@@ -1,5 +1,20 @@
 apiVersion: v1
 entries:
+  booking-service:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-06-10T11:26:24.518729066Z"
+    dependencies:
+    - name: spring-boot
+      repository: https://bookablecom.github.io/helm-charts
+      version: 0.2.2
+    description: A Helm chart for Kubernetes
+    digest: a8036674da35f7b0bba5213ebd9d0a26e10da69f7a032edba6eb0f8edea525c3
+    name: booking-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/booking-service-2.0.0/booking-service-2.0.0.tgz
+    version: 2.0.0
   config-server:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -663,4 +678,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/vault-unseal-cronjob-0.1.0/vault-unseal-cronjob-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-10T11:24:35.888640234Z"
+generated: "2022-06-10T11:26:24.518975576Z"
