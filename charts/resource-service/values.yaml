@@ -1,0 +1,29 @@
+spring-boot:
+  fullnameOverride: "resource-service"
+  image:
+    repository: ghcr.io/bookablecom/resource-service
+    tag: 0.0.15
+  imagePullSecrets:
+    - name: "dockerconfigjson-github-com"
+  extraEnv:
+    CONFIG_SERVER_URI: http://config-server:8080
+  ingress:
+    enabled: true
+    match: Host(`api.bsgrd.com`) && PathPrefix(`/resources`)
+  name: resource-service
+  healthChecks:
+    enabled: true
+    readinessProbe:
+      initialDelaySeconds: 120
+      periodSeconds: 40
+      timeoutSeconds: 15
+      failureThreshold: 60
+    livenessProbe:
+      initialDelaySeconds: 120
+      periodSeconds: 30
+      timeoutSeconds: 15
+      failureThreshold: 60
+  replicaCount: 1
+  spring:
+    profiles:
+      active: default
