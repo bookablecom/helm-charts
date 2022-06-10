@@ -55,6 +55,9 @@ spec:
             timeoutSeconds: {{ .Values.healthChecks.readinessProbe.timeoutSeconds }}
             failureThreshold: {{ .Values.healthChecks.readinessProbe.failureThreshold }}
           {{- end}}
+          envFrom:
+            - configMapRef:
+                name: {{ include "spring-boot.fullname" . }}-env
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
