@@ -1,0 +1,23 @@
+spring-boot:
+  fullnameOverride: "organization-service"
+  image:
+    repository: ghcr.io/bookablecom/organization-service
+    tag: 1.13.15
+  imagePullSecrets:
+    - name: "dockerconfigjson-github-com"
+  extraEnv:
+    CONFIG_SERVER_URI: http://config-server:8080
+  ingress:
+    enabled: true
+    match: Host(`api.bsgrd.com`) && PathPrefix(`/organizations`)
+  name: organization-service
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 120
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 120
+  replicaCount: 1
+  spring:
+    profiles:
+      active: default
