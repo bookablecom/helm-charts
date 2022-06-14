@@ -1,0 +1,17 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ required "Service name is required" .Values.service.name }}-route
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: {{ required "ingress.match value is required" .Values.ingress.match }}
+      kind: Rule
+      services:
+        - name: {{ required "Service name is required" .Values.service.name }}
+          kind: TraefikService
+  {{- if .Values.ingress.tls.enabled }}
+  tls:
+    certResolver: {{ .Values.ingress.tls.resolver }}
+  {{- end }}

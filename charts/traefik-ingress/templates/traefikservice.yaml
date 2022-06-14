@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: TraefikService
+metadata:
+  name: {{ required "Service name is required" .Values.service.name }}
+spec:
+  weighted:
+    services:
+      - name: {{ required "Service name is required" .Values.service.name }}
+        weight: 1
+        port: {{ .Values.service.port }}
+        kind: Service
