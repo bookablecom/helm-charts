@@ -40,14 +40,6 @@ healthChecks:
     timeoutSeconds: 15
     failureThreshold: 60
 
-ingress:
-  enabled: true
-  match: "" #Host(`api.bsgrd.com`) && PathPrefix(`/`)
-  annotations: {}
-  tls:
-    enabled: true
-    resolver: "" #letsencrypt
-
 resources: {}
 
 autoscaling:
