@@ -590,6 +590,17 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/test-postgres-0.1.0/test-postgres-0.1.0.tgz
     version: 0.1.0
+  traefik-ingress:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-06-14T13:13:15.625700557Z"
+    description: A Helm chart for Kubernetes
+    digest: 15a271c961edc097ad14abdb1e8b3407265579cc42a6414d4476fd7de2909c69
+    name: traefik-ingress
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/traefik-ingress-0.0.1/traefik-ingress-0.0.1.tgz
+    version: 0.0.1
   user-service:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -734,4 +745,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/vault-unseal-cronjob-0.1.0/vault-unseal-cronjob-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-10T11:45:53.455595225Z"
+generated: "2022-06-14T13:13:15.625946562Z"
