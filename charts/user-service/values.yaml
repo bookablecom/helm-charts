@@ -1,5 +1,5 @@
 spring-boot:
-  nameOverride: user-service
+  nameOverride: "user-service"
   fullnameOverride: "user-service"
   image:
     repository: ghcr.io/bookablecom/user-service
@@ -28,3 +28,12 @@ spring-boot:
   spring:
     profiles:
       active: default
+traefik-ingress:
+  ingress:
+    match: "Host(`api.bsgrd.com`) && PathPrefix(`/users`)"
+    tls:
+      enabled: true
+      resolver: "letsencrypt"
+  service:
+    name: "user-service"
+    port: 8080

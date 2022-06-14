@@ -1,5 +1,5 @@
 spring-boot:
-  nameOverride: booking-service
+  nameOverride: "booking-service"
   fullnameOverride: "booking-service"
   image:
     repository: ghcr.io/bookablecom/booking-service
@@ -12,7 +12,6 @@ spring-boot:
     enabled: true
     match: Host(`api.bsgrd.com`) && PathPrefix(`/bookings`)
   name: booking-service
-  nameOverride: booking-service
   healthChecks:
     enabled: true
     readinessProbe:
@@ -29,3 +28,12 @@ spring-boot:
   spring:
     profiles:
       active: default
+traefik-ingress:
+  ingress:
+    match: "Host(`api.bsgrd.com`) && PathPrefix(`/bookings`)"
+    tls:
+      enabled: true
+      resolver: "letsencrypt"
+  service:
+    name: "booking-service"
+    port: 8080

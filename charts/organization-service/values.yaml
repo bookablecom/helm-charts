@@ -1,5 +1,5 @@
 spring-boot:
-  nameOverride: organization-service
+  nameOverride: "organization-service"
   fullnameOverride: "organization-service"
   image:
     repository: ghcr.io/bookablecom/organization-service
@@ -28,3 +28,12 @@ spring-boot:
   spring:
     profiles:
       active: default
+traefik-ingress:
+  ingress:
+    match: "Host(`api.bsgrd.com`) && PathPrefix(`/organizations`)"
+    tls:
+      enabled: true
+      resolver: "letsencrypt"
+  service:
+    name: "organization-service"
+    port: 8080

@@ -1,5 +1,5 @@
 spring-boot:
-  nameOverride: resource-service
+  nameOverride: "resource-service"
   fullnameOverride: "resource-service"
   image:
     repository: ghcr.io/bookablecom/resource-service
@@ -28,3 +28,12 @@ spring-boot:
   spring:
     profiles:
       active: default
+traefik-ingress:
+  ingress:
+    match: "Host(`api.bsgrd.com`) && PathPrefix(`/resources`)"
+    tls:
+      enabled: true
+      resolver: "letsencrypt"
+  service:
+    name: "resource-service"
+    port: 8080
