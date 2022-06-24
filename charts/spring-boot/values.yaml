@@ -11,7 +11,8 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
-extraEnv: {}
+extraEnv:
+  TOKEN: TEST
 serviceAccount:
   create: true
   annotations: {}
@@ -32,9 +33,6 @@ healthChecks:
     httpGet:
       path: /actuator/health/readiness
       port: http
-    httpHeaders:
-      - name: authorization
-        value: ""
     initialDelaySeconds: 120
     periodSeconds: 40
     timeoutSeconds: 15
@@ -43,9 +41,6 @@ healthChecks:
     httpGet:
       path: /actuator/health/liveness
       port: http
-    httpHeaders:
-      - name: authorization
-        value: ""
     initialDelaySeconds: 120
     periodSeconds: 40
     timeoutSeconds: 15
