@@ -29,6 +29,7 @@ service:
   port: 8080
 
 healthChecks:
+  enabled: true
   readinessProbe:
     httpGet:
       path: /actuator/health/readiness
