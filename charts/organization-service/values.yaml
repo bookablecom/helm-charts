@@ -8,9 +8,6 @@ spring-boot:
     - name: "dockerconfigjson-github-com"
   extraEnv:
     CONFIG_SERVER_URI: http://config-server:8080
-  ingress:
-    enabled: true
-    match: Host(`api.bsgrd.com`) && PathPrefix(`/organizations`)
   name: organization-service
   healthChecks:
     enabled: true
@@ -30,7 +27,7 @@ spring-boot:
       active: default
 traefik-ingress:
   ingress:
-    match: "Host(`api.bsgrd.com`) && PathPrefix(`/organizations`)"
+    match: "Host(`api.bsgrd.com`) && Path(`/organizations`, `/organizations/{id}`, `/organizations/{id}/invitations`, `/invitations`, `/invitations/{id}`)"
     tls:
       enabled: true
       resolver: "letsencrypt"
