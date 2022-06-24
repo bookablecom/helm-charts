@@ -40,8 +40,9 @@ healthChecks:
     timeoutSeconds: 15
     failureThreshold: 60
   livenessProbe:
-    path: /actuator/health/liveness
-    port: http
+    httpGet:
+      path: /actuator/health/liveness
+      port: http
     httpHeaders:
       - name: authorization
         value: ""

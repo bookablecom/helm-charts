@@ -10,17 +10,28 @@ spring-boot:
     CONFIG_SERVER_URI: http://config-server:8080
   name: resource-service
   healthChecks:
-    enabled: true
     readinessProbe:
+      httpGet:
+        path: /actuator/health/readiness
+        port: http
+      httpHeaders:
+        - name: authorization
+          value: ""
       initialDelaySeconds: 120
       periodSeconds: 40
       timeoutSeconds: 15
       failureThreshold: 60
     livenessProbe:
+      httpGet:
+        path: /actuator/health/liveness
+        port: http
+      httpHeaders:
+        - name: authorization
+          value: ""
       initialDelaySeconds: 120
-      periodSeconds: 30
+      periodSeconds: 40
       timeoutSeconds: 15
-      failureThreshold: 60
+      failureThreshold: 600
   replicaCount: 1
   spring:
     profiles:
