@@ -37,24 +37,10 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          {{- if .Values.healthChecks.enabled }}
           livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: http
-            initialDelaySeconds: {{ .Values.healthChecks.livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.healthChecks.livenessProbe.periodSeconds }}
-            timeoutSeconds: {{ .Values.healthChecks.livenessProbe.timeoutSeconds }}
-            failureThreshold: {{ .Values.healthChecks.livenessProbe.failureThreshold }}
+            {{- toYaml .Values.healthChecks.livenessProbe | nindent 12 }}            
           readinessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: http
-            initialDelaySeconds: {{ .Values.healthChecks.readinessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.healthChecks.readinessProbe.periodSeconds }}
-            timeoutSeconds: {{ .Values.healthChecks.readinessProbe.timeoutSeconds }}
-            failureThreshold: {{ .Values.healthChecks.readinessProbe.failureThreshold }}
-          {{- end}}
+            {{- toYaml .Values.healthChecks.readinessProbe | nindent 12 }}  
           envFrom:
             - configMapRef:
                 name: {{ include "spring-boot.fullname" . }}-env
