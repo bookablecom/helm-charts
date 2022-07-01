@@ -3,35 +3,16 @@ spring-boot:
   fullnameOverride: "organization-service"
   image:
     repository: ghcr.io/bookablecom/organization-service
-    tag: 1.13.15
+    tag: 1.13.22
   imagePullSecrets:
     - name: "dockerconfigjson-github-com"
   extraEnv:
     CONFIG_SERVER_URI: http://config-server:8080
   name: organization-service
   healthChecks:
-    readinessProbe:
-      httpGet:
-        path: /actuator/health/readiness
-        port: http
-      httpHeaders:
-        - name: authorization
-          value: ""
-      initialDelaySeconds: 120
-      periodSeconds: 40
-      timeoutSeconds: 15
-      failureThreshold: 60
-    livenessProbe:
-      httpGet:
-        path: /actuator/health/liveness
-        port: http
-      httpHeaders:
-        - name: authorization
-          value: ""
-      initialDelaySeconds: 120
-      periodSeconds: 40
-      timeoutSeconds: 15
-      failureThreshold: 60
+    enabled: false
+    readinessProbe: {}
+    livenessProbe: {}
   replicaCount: 1
   spring:
     profiles:

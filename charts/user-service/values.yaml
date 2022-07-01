@@ -3,20 +3,21 @@ spring-boot:
   fullnameOverride: "user-service"
   image:
     repository: ghcr.io/bookablecom/user-service
-    tag: 1.5.17
+    tag: 1.5.24
   imagePullSecrets:
     - name: "dockerconfigjson-github-com"
   extraEnv:
     CONFIG_SERVER_URI: http://config-server:8080
   name: user-service
   healthChecks:
+    enabled: false
     readinessProbe:
       httpGet:
         path: /actuator/health/readiness
         port: http
-      httpHeaders:
-        - name: authorization
-          value: ""
+        httpHeaders:
+          - name: authorization
+      value: "Bearer xxx"
       initialDelaySeconds: 120
       periodSeconds: 40
       timeoutSeconds: 15
@@ -25,9 +26,9 @@ spring-boot:
       httpGet:
         path: /actuator/health/liveness
         port: http
-      httpHeaders:
-        - name: authorization
-          value: ""
+        httpHeaders:
+          - name: authorization
+            value: "Bearer xxx"
       initialDelaySeconds: 120
       periodSeconds: 40
       timeoutSeconds: 15
