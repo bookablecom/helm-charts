@@ -3,13 +3,14 @@ spring-boot:
   fullnameOverride: "resource-service"
   image:
     repository: ghcr.io/bookablecom/resource-service
-    tag: 0.0.15
+    tag: 0.0.18
   imagePullSecrets:
     - name: "dockerconfigjson-github-com"
   extraEnv:
     CONFIG_SERVER_URI: http://config-server:8080
   name: resource-service
   healthChecks:
+    enabled: false
     readinessProbe:
       httpGet:
         path: /actuator/health/readiness
@@ -38,7 +39,7 @@ spring-boot:
       active: default
 traefik-ingress:
   ingress:
-    match: "Host(`api.bsgrd.com`) && Path(`/resources`, `/resources/{id}`, `/organizations/{id}/resources`)"
+    match: "Host(`api.bsgrd.com`) && Path(`/resources`, `/resources/{id}`, `/organizations/{id}/resources`, `/organizations/{id}/resources/{resId}`, `/organizations/{id}/resourceTypes`)"
     tls:
       enabled: true
       resolver: "letsencrypt"
