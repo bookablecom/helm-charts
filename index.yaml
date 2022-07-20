@@ -3,6 +3,24 @@ entries:
   booking-service:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-07-20T14:04:09.467287889Z"
+    dependencies:
+    - name: spring-boot
+      repository: https://bookablecom.github.io/helm-charts
+      version: 2.0.3
+    - condition: traefik-ingress.enabled
+      name: traefik-ingress
+      repository: https://bookablecom.github.io/helm-charts
+      version: 0.0.1
+    description: A Helm chart for Kubernetes
+    digest: 0aeecc55d9889f53a870d7ae365bf700168d8eda16c4f366259a33fba99d43d0
+    name: booking-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/booking-service-4.0.2/booking-service-4.0.2.tgz
+    version: 4.0.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-07-01T10:28:51.210662773Z"
     dependencies:
     - name: spring-boot
@@ -284,6 +302,24 @@ entries:
   organization-service:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-07-20T14:04:09.754166434Z"
+    dependencies:
+    - name: spring-boot
+      repository: https://bookablecom.github.io/helm-charts
+      version: 2.0.3
+    - condition: traefik-ingress.enabled
+      name: traefik-ingress
+      repository: https://bookablecom.github.io/helm-charts
+      version: 0.0.1
+    description: A Helm chart for Kubernetes
+    digest: 1c6986aa0ee8cde6c25393952c0483ffd0b51cb027adbf41dafdb9c9a01098e9
+    name: organization-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/organization-service-4.0.2/organization-service-4.0.2.tgz
+    version: 4.0.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-07-01T10:28:51.358426885Z"
     dependencies:
     - name: spring-boot
@@ -515,6 +551,24 @@ entries:
     - https://github.com/bookablecom/helm-charts/releases/download/rabbitmq-1.0.0/rabbitmq-1.0.0.tgz
     version: 1.0.0
   resource-service:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-07-20T14:04:10.023484095Z"
+    dependencies:
+    - name: spring-boot
+      repository: https://bookablecom.github.io/helm-charts
+      version: 2.0.3
+    - condition: traefik-ingress.enabled
+      name: traefik-ingress
+      repository: https://bookablecom.github.io/helm-charts
+      version: 0.0.1
+    description: A Helm chart for Kubernetes
+    digest: 015fa53d0296e49d8210840d6bd6f11ca4d4b587e37017294862174c1c6cfa33
+    name: resource-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/resource-service-4.0.2/resource-service-4.0.2.tgz
+    version: 4.0.2
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-07-01T09:17:33.356004493Z"
@@ -873,6 +927,24 @@ entries:
   user-service:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-07-20T14:04:10.289042674Z"
+    dependencies:
+    - name: spring-boot
+      repository: https://bookablecom.github.io/helm-charts
+      version: 2.0.3
+    - condition: traefik-ingress.enabled
+      name: traefik-ingress
+      repository: https://bookablecom.github.io/helm-charts
+      version: 0.0.1
+    description: A Helm chart for Kubernetes
+    digest: 965514662a733724e43a711228fc42603c08ce11ed72fbcbd814aefa1a91fa55
+    name: user-service
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/user-service-4.0.2/user-service-4.0.2.tgz
+    version: 4.0.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-07-01T10:28:51.482518883Z"
     dependencies:
     - name: spring-boot
@@ -1082,4 +1154,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/vault-unseal-cronjob-0.1.0/vault-unseal-cronjob-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-01T10:28:51.482805189Z"
+generated: "2022-07-20T14:04:10.289388182Z"
