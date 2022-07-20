@@ -2,7 +2,7 @@ apiVersion: v2
 name: organization-service
 description: A Helm chart for Kubernetes
 type: application
-version: 4.0.1
+version: 4.0.2
 appVersion: "1.16.0"
 dependencies:
   - name: spring-boot
@@ -11,4 +11,5 @@ dependencies:
 
   - name: traefik-ingress
     version: "0.0.1"
+    condition: traefik-ingress.enabled
     repository: "https://bookablecom.github.io/helm-charts"
