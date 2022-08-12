@@ -288,6 +288,21 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/keycloak-1.0.0/keycloak-1.0.0.tgz
     version: 1.0.0
+  keycloak-adapter:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-08-12T12:50:38.716157317Z"
+    dependencies:
+    - name: spring-boot
+      repository: https://bookablecom.github.io/helm-charts
+      version: 2.0.3
+    description: A Helm chart for Kubernetes
+    digest: 5e297af3a2af7e94803b082042768da59143ec632441581d455a1781142d9859
+    name: keycloak-adapter
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/keycloak-adapter-1.0.0/keycloak-adapter-1.0.0.tgz
+    version: 1.0.0
   keycloak-initializer:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -1154,4 +1169,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/vault-unseal-cronjob-0.1.0/vault-unseal-cronjob-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-20T14:04:10.289388182Z"
+generated: "2022-08-12T12:50:38.716487221Z"
