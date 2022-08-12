@@ -1,0 +1,10 @@
+apiVersion: v2
+name: keycloak-adapter
+description: A Helm chart for Kubernetes
+type: application
+version: 1.0.0
+appVersion: "1.16.0"
+dependencies:
+  - name: spring-boot
+    version: "2.0.3"
+    repository: "https://bookablecom.github.io/helm-charts"

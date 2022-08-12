@@ -1,0 +1,39 @@
+spring-boot:
+  nameOverride: "keycloak-adapter"
+  fullnameOverride: "keycloak-adapter"
+  image:
+    repository: ghcr.io/bookablecom/keycloak-adapter
+    tag: 0.3.0
+  imagePullSecrets:
+    - name: "dockerconfigjson-github-com"
+  extraEnv:
+    CONFIG_SERVER_URI: http://config-server:8080
+  name: keycloak-adapter
+  healthChecks:
+    enabled: false
+    readinessProbe:
+      httpGet:
+        path: /actuator/health/readiness
+        port: http
+        httpHeaders:
+          - name: authorization
+      value: "Bearer xxx"
+      initialDelaySeconds: 120
+      periodSeconds: 40
+      timeoutSeconds: 15
+      failureThreshold: 60
+    livenessProbe:
+      httpGet:
+        path: /actuator/health/liveness
+        port: http
+        httpHeaders:
+          - name: authorization
+            value: "Bearer xxx"
+      initialDelaySeconds: 120
+      periodSeconds: 40
+      timeoutSeconds: 15
+      failureThreshold: 60
+  replicaCount: 1
+  spring:
+    profiles:
+      active: default
