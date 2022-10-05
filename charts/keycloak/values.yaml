@@ -1,6 +1,6 @@
 replicaCount: 1
 
-image: koolwithk/keycloak-arm:16.0.0
+image: ghcr.io/bookablecom/keycloak:2.0.0
 
 name: keycloak
 

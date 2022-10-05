@@ -25,10 +25,6 @@ spec:
             - name: https
               containerPort: 8443
               protocol: TCP
-          volumeMounts:
-            - name: keycloak-plugin
-              mountPath: /opt/jboss/keycloak/standalone/deployments/keycloak-to-rabbit-2.1.jar
-              subPath: keycloak-to-rabbit-2.1.jar
           envFrom:
             - secretRef:
                 name: {{ .Values.db.secret.name }}
@@ -36,7 +32,3 @@ spec:
                 name: {{ .Values.keycloak.admin.secret.name }}
             - configMapRef:
                 name: keycloak-config
-      volumes:
-        - name: keycloak-plugin
-          configMap:
-            name: keycloak-plugin
