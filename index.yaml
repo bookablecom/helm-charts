@@ -199,6 +199,16 @@ entries:
     version: 1.0.0
   keycloak:
   - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2022-10-05T11:21:53.110102948Z"
+    description: A Helm chart for Kubernetes
+    digest: e08bedb2ccaf1ff3d31328b349470b4ffa9cf048e1b2b5dcf19baf733b2afb0c
+    name: keycloak
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/keycloak-4.0.0/keycloak-4.0.0.tgz
+    version: 4.0.0
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-04-12T14:42:50.428832111Z"
     description: A Helm chart for Kubernetes
@@ -1169,4 +1179,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/vault-unseal-cronjob-0.1.0/vault-unseal-cronjob-0.1.0.tgz
     version: 0.1.0
-generated: "2022-08-12T12:50:38.716487221Z"
+generated: "2022-10-05T11:21:53.110433848Z"
