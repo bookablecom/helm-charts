@@ -39,7 +39,7 @@ spring-boot:
       active: default
 traefik-ingress:
   ingress:
-    match: "Host(`api.bsgrd.com`) && Path(`/bookings`, `/bookings/{id}`, `/organizations/{id}/bookings`)"
+    match: "Host(`api.bsgrd.com`) && Path(`/bookings`, `/bookings/{id}`, `/organizations/{id}/bookings`, `/resources/{id}/bookings`)"
     tls:
       enabled: true
       resolver: "letsencrypt"
