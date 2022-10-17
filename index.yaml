@@ -521,6 +521,17 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/organization-service-0.2.0/organization-service-0.2.0.tgz
     version: 0.2.0
+  pact-broker:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-10-17T06:49:12.772158715Z"
+    description: A Helm chart for Kubernetes
+    digest: ce33421c6962f89695c28fe962e57f7c7a6683d7c5576a3316c2686fde66d25b
+    name: pact-broker
+    type: application
+    urls:
+    - https://github.com/bookablecom/helm-charts/releases/download/pact-broker-0.1.0/pact-broker-0.1.0.tgz
+    version: 0.1.0
   postgres:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -1197,4 +1208,4 @@ entries:
     urls:
     - https://github.com/bookablecom/helm-charts/releases/download/vault-unseal-cronjob-0.1.0/vault-unseal-cronjob-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-13T10:09:16.068704482Z"
+generated: "2022-10-17T06:49:12.772623715Z"
