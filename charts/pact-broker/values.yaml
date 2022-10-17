@@ -15,6 +15,24 @@ serviceAccount:
   annotations: {}
   name: ""
 
+envFrom:
+  - configMapRef:
+      name: pact-broker-env
+
+env:
+  - name: PACT_BROKER_DATABASE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: pact.bookable-cluster.credentials.postgresql.acid.zalan.do
+        key: username
+        optional: false
+  - name: PACT_BROKER_DATABASE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: pact.bookable-cluster.credentials.postgresql.acid.zalan.do
+        key: password
+        optional: false
+
 podAnnotations: {}
 
 podSecurityContext: {}
