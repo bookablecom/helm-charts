@@ -18,7 +18,7 @@ jobs:
         uses: goodsmileduck/helm-push-action@v3
         env:
           SOURCE_DIR: "."
-          CHART_FOLDER: "./charts"
+          CHART_FOLDER: ""
           FORCE: "True"
           CHARTMUSEUM_URL: "https://charts.bsgrd.com"
           CHARTMUSEUM_USER: "${{ secrets.CHARTMUSEUM_USER }}"
