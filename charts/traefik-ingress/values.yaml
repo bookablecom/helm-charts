@@ -6,3 +6,5 @@ ingress:
 service:
   name: ""
   port: 8080
+
+middlewares: []

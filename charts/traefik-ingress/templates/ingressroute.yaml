@@ -8,6 +8,8 @@ spec:
   routes:
     - match: {{ required "ingress.match value is required" .Values.ingress.match }}
       kind: Rule
+      middlewares:
+      {{- toYaml .Values.middlewares | nindent 8 }}
       services:
         - name: {{ required "Service name is required" .Values.service.name }}
           kind: TraefikService
