@@ -17,8 +17,8 @@ jobs:
       - name: Release helm chart
         uses: goodsmileduck/helm-push-action@v3
         env:
-          SOURCE_DIR: "."
-          CHART_FOLDER: ""
+          SOURCE_DIR: "./charts"
+          CHART_FOLDER: "booking-service"
           FORCE: "True"
           CHARTMUSEUM_URL: "https://charts.bsgrd.com"
           CHARTMUSEUM_USER: "${{ secrets.CHARTMUSEUM_USER }}"
