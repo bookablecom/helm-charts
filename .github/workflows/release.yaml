@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  release:
+  chartmuseumRelease:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -14,24 +14,42 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configure Git
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-
-      - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.4.1
-
-      - name: Add dependency chart repos
-        run: |
-          helm repo add bitnami https://charts.bitnami.com/bitnami
-
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.2.1
-        with:
-          charts_dir: charts
-          config: cr.yaml
+      - name: Release helm chart
+        uses: goodsmileduck/helm-push-action@v3
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          SOURCE_DIR: "."
+          CHART_FOLDER: "./charts"
+          FORCE: "True"
+          CHARTMUSEUM_URL: "https://charts.bsgrd.com"
+          CHARTMUSEUM_USER: "${{ secrets.CHARTMUSEUM_USER }}"
+          CHARTMUSEUM_PASSWORD: ${{ secrets.CHARTMUSEUM_PASSWORD }}
+
+  # release:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0
+
+  #     - name: Configure Git
+  #       run: |
+  #         git config user.name "$GITHUB_ACTOR"
+  #         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+  #     - name: Install Helm
+  #       uses: azure/setup-helm@v1
+  #       with:
+  #         version: v3.4.1
+
+  #     - name: Add dependency chart repos
+  #       run: |
+  #         helm repo add bitnami https://charts.bitnami.com/bitnami
+
+  #     - name: Run chart-releaser
+  #       uses: helm/chart-releaser-action@v1.2.1
+  #       with:
+  #         charts_dir: charts
+  #         config: cr.yaml
+  #       env:
+  #         CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
