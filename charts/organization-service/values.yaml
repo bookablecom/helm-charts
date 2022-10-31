@@ -26,3 +26,7 @@ traefik-ingress:
   service:
     name: "organization-service"
     port: 8080
+
+  middlewares:
+    - namespace: default
+      name: cors-headers
