@@ -46,3 +46,7 @@ traefik-ingress:
   service:
     name: "resource-service"
     port: 8080
+
+  middlewares:
+    - namespace: default
+      name: cors-headers
